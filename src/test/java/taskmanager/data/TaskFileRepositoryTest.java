@@ -65,5 +65,29 @@ class TaskFileRepositoryTest {
         assertNull(notValid);
     }
 
+    @Test
+    public void shouldCreate() throws DataAccessException{
+        Task task=new Task(
+                0,
+                "2024-01-06",
+                "Get a job!",
+                "Please give me a job",
+                "2024-05-01",
+                Status.TODO
 
+
+        );
+
+        Task actual=repository.create(task);
+        assertEquals(3, actual.getId());
+
+        List<Task> tasks = repository.findAll();
+        assertEquals(3,tasks.size());
+        assertEquals("2024-01-06",actual.getCreatedOn());
+        assertEquals("Get a job!",actual.getTitle());
+        assertEquals("Please give me a job",actual.getDescription());
+        assertEquals("2024-05-01",actual.getDueDate());
+        assertEquals(Status.TODO,actual.getStatus());
+
+    }
 }
