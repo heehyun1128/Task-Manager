@@ -73,7 +73,18 @@ public class TaskFileRepository implements TaskRepository {
         return false;
     }
 
-
+    @Override
+    public boolean delete(int taskId) throws DataAccessException {
+        List<Task> tasks=findAll();
+        for(int i=0;i<tasks.size();i++){
+            if(tasks.get(i).getId()==taskId){
+                tasks.remove(i);
+                writeToFile(tasks);
+                return true;
+            }
+        }
+        return false;
+    }
 
 //    HELPER METHODS
     private String restore(String value){
