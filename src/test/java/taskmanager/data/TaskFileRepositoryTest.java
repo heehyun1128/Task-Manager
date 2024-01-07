@@ -136,4 +136,11 @@ class TaskFileRepositoryTest {
         assertEquals(Status.IN_PROGRESS, task.getStatus());
 
     }
+
+    @Test
+    public void shouldNotUpdateWithNonExistingId() throws DataAccessException{
+        Task task=new Task(10000000,"","","","",Status.COMPLETE);
+        boolean res = repository.update(task);
+        assertFalse(res);
+    }
 }
