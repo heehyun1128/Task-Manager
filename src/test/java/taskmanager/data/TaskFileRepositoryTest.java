@@ -46,6 +46,19 @@ class TaskFileRepositoryTest {
 
     }
 
+    @Test
+    public void shouldFindByExistingId() throws DataAccessException{
+        Task taskOne=repository.findById(1);
+        assertNotNull(taskOne);
+        assertEquals(1,taskOne.getId());
+        assertEquals("2024-01-05",taskOne.getCreatedOn());
+        assertEquals("LeetCode",taskOne.getTitle());
+        assertEquals("Solve 5 LeetCode problems",taskOne.getDescription());
+        assertEquals("2024-01-05",taskOne.getDueDate());
+        assertEquals(Status.COMPLETE, taskOne.getStatus());
+    }
+
+
 
 
 }
