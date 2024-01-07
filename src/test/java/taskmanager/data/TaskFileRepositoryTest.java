@@ -90,4 +90,30 @@ class TaskFileRepositoryTest {
         assertEquals(Status.TODO,actual.getStatus());
 
     }
+
+    @Test
+    public void shouldCreateWithCommas() throws DataAccessException{
+        Task task=new Task(
+                0,
+                "2024-01-06",
+                "I will get a job!",
+                "I will become a software engineer",
+                "2024-05-01",
+                Status.TODO
+
+
+        );
+
+        Task actual=repository.create(task);
+        assertEquals(3, actual.getId());
+
+        List<Task> tasks = repository.findAll();
+        assertEquals(3,tasks.size());
+        assertEquals("2024-01-06",actual.getCreatedOn());
+        assertEquals("I will get a job!",actual.getTitle());
+        assertEquals("I will become a software engineer",actual.getDescription());
+        assertEquals("2024-05-01",actual.getDueDate());
+        assertEquals(Status.TODO,actual.getStatus());
+
+    }
 }
