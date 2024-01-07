@@ -116,4 +116,24 @@ class TaskFileRepositoryTest {
         assertEquals(Status.TODO,actual.getStatus());
 
     }
+
+    @Test
+    public void shouldUpdate() throws DataAccessException{
+        Task task=repository.findById(1);
+        task.setStatus(Status.IN_PROGRESS);
+        task.setDescription("Solve 10 LeetCode problems");
+
+        boolean res=repository.update(task);
+        assertTrue(res);
+
+        assertNotNull(task);
+
+        assertEquals(1,task.getId());
+        assertEquals("2024-01-05",task.getCreatedOn());
+        assertEquals("LeetCode",task.getTitle());
+        assertEquals("Solve 10 LeetCode problems",task.getDescription());
+        assertEquals("2024-01-05",task.getDueDate());
+        assertEquals(Status.IN_PROGRESS, task.getStatus());
+
+    }
 }
