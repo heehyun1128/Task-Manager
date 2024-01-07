@@ -59,6 +59,11 @@ class TaskFileRepositoryTest {
     }
 
 
+    @Test
+    public void shoudNotFindNonExistingId() throws DataAccessException{
+        Task notValid = repository.findById(1000);
+        assertNull(notValid);
+    }
 
 
 }
